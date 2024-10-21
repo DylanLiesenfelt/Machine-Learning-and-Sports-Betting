@@ -8,20 +8,20 @@ features = ['Age', 'Cmp', 'Att', 'Cmp%', 'Pass_TD', 'Int', 'Passer_rating', 'Sk'
 target = ['Pass_Yds']
 
 #Opp Defense Data
-games_played = 6
+games_played = 7
 
-opp_passYards_allowed = (1291)/games_played
-opp_cmp_allowed = (120)/games_played
-opp_passAtt_allowed = (195)/games_played
+opp_passYards_allowed = (1436)/games_played
+opp_cmp_allowed = (136)/games_played
+opp_passAtt_allowed = (222)/games_played
 opp_cmpPer_allowed = ((opp_cmp_allowed/opp_passAtt_allowed) *100)
-opp_passTD_allowed = (8)/games_played
-opp_int = (6)/games_played
+opp_passTD_allowed = (9)/games_played
+opp_int = (8)/games_played
 a = ((opp_cmp_allowed/opp_passAtt_allowed)-0.3) * 5
 b = ((opp_passYards_allowed/opp_passAtt_allowed)-3) * 0.25
 c = ((opp_passTD_allowed/opp_passAtt_allowed)) * 20
 d = 2.375 - ((opp_int/opp_passAtt_allowed) * 25)
 opp_passerRate_allowed = (((a+b+c+d)/6) *100)
-opp_sacks = (8)/games_played
+opp_sacks = (18)/games_played
 opp_ya = (opp_passYards_allowed/opp_passAtt_allowed)
 
 #Qb vs Opp Defense Data
@@ -69,10 +69,10 @@ def prediction(data, features, target, norm1, norm2):
     norm_predict = (norm1/norm2) * final_predict # Normalize
 
     # Display results
-    print(f'Avg vs Opp {qb_passYards_opp:.2f}')
-    print(f'Opp Pass Avg Allowed 2024 {opp_passYards_allowed:.2f}')
-    print(f'Predicted Pass Yards {final_predict:.2f}')
-    print(f'Predicted Outcome Normalized {norm_predict:.2f} {target}')
+    print(f'Average Pass YArds vs Opponent: {qb_passYards_opp:.2f}')
+    print(f'Average Opponent Pass Yards Allowed 2024: {opp_passYards_allowed:.2f}')
+    print(f'Predicted Pass Yards: {final_predict:.2f}')
+    print(f'Predicted Normalized: {norm_predict:.2f}')
 
 
 # Read data set
