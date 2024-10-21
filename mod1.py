@@ -1,19 +1,19 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, max_error, mean_absolute_percentage_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 
 data = 'DakPrescott.csv'
 features = ['Age', 'Cmp', 'Att', 'Cmp%', 'Pass_TD', 'Int', 'Passer_rating', 'Sk', 'Y/A']
 target = ['Pass_Yds']
 
 #Opp Defense Data
-games_played = 7
+games_played = 6
 
 opp_passYards_allowed = (1291)/games_played
 opp_cmp_allowed = (120)/games_played
 opp_passAtt_allowed = (195)/games_played
-opp_cmpPer_allowed = ((opp_cmp_allowed/opp_passAtt_allowed) *100)/games_played
+opp_cmpPer_allowed = ((opp_cmp_allowed/opp_passAtt_allowed) *100)
 opp_passTD_allowed = (8)/games_played
 opp_int = (6)/games_played
 a = ((opp_cmp_allowed/opp_passAtt_allowed)-0.3) * 5
@@ -21,9 +21,8 @@ b = ((opp_passYards_allowed/opp_passAtt_allowed)-3) * 0.25
 c = ((opp_passTD_allowed/opp_passAtt_allowed)) * 20
 d = 2.375 - ((opp_int/opp_passAtt_allowed) * 25)
 opp_passerRate_allowed = (((a+b+c+d)/6) *100)
-print(opp_passerRate_allowed)
 opp_sacks = (8)/games_played
-opp_ya = (opp_passYards_allowed/opp_passAtt_allowed)/games_played
+opp_ya = (opp_passYards_allowed/opp_passAtt_allowed)
 
 #Qb vs Opp Defense Data
 qb_gamesPlayed_opp = 3
@@ -31,12 +30,12 @@ qb_gamesPlayed_opp = 3
 qb_passYards_opp = (632)/qb_gamesPlayed_opp
 qb_cmp_opp = (53)/qb_gamesPlayed_opp
 qb_att_opp = (81)/qb_gamesPlayed_opp
-qb_cmpPer_opp = ((qb_cmp_opp/qb_att_opp)*100)/qb_gamesPlayed_opp
+qb_cmpPer_opp = 65.43
 qb_passTD_opp = (6)/qb_gamesPlayed_opp
 qb_int_opp = (3)/qb_gamesPlayed_opp
 qb_passRate = 98.4
 qb_sacked_opp = (5)/games_played
-qb_ya_opp = (qb_passYards_opp/qb_att_opp)/games_played
+qb_ya_opp = 7.8
 
 # QB Stats Normalized
 age = 31.25
@@ -55,7 +54,7 @@ test = pd.DataFrame([inputs], columns=features)
 print(test)
 
 # Model
-def prediction(data, features, target):
+def prediction(data, features, target, norm1, norm2):
     df = read_data(data)
 
     X_train, X_test, y_train, y_test = split_data(df[features], df[target])
@@ -63,13 +62,17 @@ def prediction(data, features, target):
     model = train_model(X_train, y_train)
     test_model(model, X_test, y_test)
 
-    # Safely convert prediction result to float
+    # Convert prediction result to float
     final_predict = model.predict(test)
-    if final_predict.ndim == 1:        final_predict = final_predict[0]  # Assuming predict returns a 1D array for single prediction
-    elif final_predict.ndim == 2:
-        final_predict = final_predict[0, 0]  # Assuming predict returns a 2D array with one row and one column
+    final_predict = final_predict[0, 0]
     final_predict = float(final_predict)
-    print(f'Predicted Outcome {final_predict:.2f} {target}')
+    norm_predict = (norm1/norm2) * final_predict # Normalize
+
+    # Display results
+    print(f'Avg vs Opp {qb_passYards_opp:.2f}')
+    print(f'Opp Pass Avg Allowed 2024 {opp_passYards_allowed:.2f}')
+    print(f'Predicted Pass Yards {final_predict:.2f}')
+    print(f'Predicted Outcome Normalized {norm_predict:.2f} {target}')
 
 
 # Read data set
@@ -80,7 +83,7 @@ def read_data(data):
 
 # Split data
 def split_data(features, target):
-    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=69, shuffle=True)
+    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=69)
     return X_train, X_test, y_train, y_test
 
 # Train the model
@@ -100,4 +103,4 @@ def test_model(model, X_test, y_test):
     print(f'Mean Absolute Error: {mae:.2f}\nMAE %: {maePer:.2f}\nMean Squared Error: {mse:.2f}\nR2 Score: {r2:.2f}')
 
 # Execute
-prediction(data, features, target)
+prediction(data, features, target, qb_passYards_opp, opp_passYards_allowed)
