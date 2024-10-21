@@ -89,7 +89,7 @@ def train_model(X_train, y_train):
     linear_reg.fit(X_train, y_train)
     return linear_reg
 
-# Tes the model
+# Test the model
 def test_model(model, X_test, y_test):
     prediction = model.predict(X_test)
 
