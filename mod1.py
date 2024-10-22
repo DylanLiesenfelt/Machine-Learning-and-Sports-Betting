@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
+from sklearn.metrics import mean_absolute_error, r2_score, mean_absolute_percentage_error
 
 data = 'DakPrescott.csv'
 features = ['Age', 'Cmp', 'Att', 'Cmp%', 'Pass_TD', 'Int', 'Passer_rating', 'Sk', 'Y/A']
@@ -53,7 +53,7 @@ inputs = [age, completions, attempts, completionPercentage, passTD, interception
 test = pd.DataFrame([inputs], columns=features)
 print(test)
 
-# Model
+
 def prediction(data, features, target, norm1, norm2):
     df = read_data(data)
 
@@ -69,7 +69,7 @@ def prediction(data, features, target, norm1, norm2):
     norm_predict = (norm1/norm2) * final_predict # Normalize
 
     # Display results
-    print(f'Average Pass YArds vs Opponent: {qb_passYards_opp:.2f}')
+    print(f'Average Pass Yards vs Opponent: {qb_passYards_opp:.2f}')
     print(f'Average Opponent Pass Yards Allowed 2024: {opp_passYards_allowed:.2f}')
     print(f'Predicted Pass Yards: {final_predict:.2f}')
     print(f'Predicted Normalized: {norm_predict:.2f}')
@@ -98,9 +98,8 @@ def test_model(model, X_test, y_test):
 
     mae = mean_absolute_error(y_test, prediction)
     maePer = mean_absolute_percentage_error(y_test, prediction) *100
-    mse = mean_squared_error(y_test, prediction)
     r2 = r2_score(y_test, prediction)
-    print(f'Mean Absolute Error: {mae:.2f}\nMAE %: {maePer:.2f}\nMean Squared Error: {mse:.2f}\nR2 Score: {r2:.2f}')
+    print(f'Mean Absolute Error: {mae:.2f}\nMAE %: {maePer:.2f}\nR2 Score: {r2:.2f}')
 
 # Execute
 prediction(data, features, target, qb_passYards_opp, opp_passYards_allowed)
