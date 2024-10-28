@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, r2_score, mean_absolute_percentage_error
 
-data = 'DakPrescott.csv'
+data = 'Models/1.DALvsSF/DakPrescott.csv' # Will need to change depending on where you have CSV
 features = ['Cmp', 'Pass_TD', 'Y/A']
 target = ['Pass_Yds']
 

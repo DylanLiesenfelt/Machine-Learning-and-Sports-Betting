@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, r2_score, mean_absolute_percentage_error
 
-data = 'DakPrescott.csv'
+data = './main/DakPrescott.csv'
 features = ['Age', 'Cmp', 'Att', 'Cmp%', 'Pass_TD', 'Int', 'Passer_rating', 'Sk', 'Y/A']
 target = ['Pass_Yds']
 
