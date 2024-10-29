@@ -40,7 +40,7 @@ yardsPerAttempt = (qb_ya_opp/opp_ya) * qb_ya_opp
 # Predicted inputs
 inputs = [completions, passTD, yardsPerAttempt]
 test = pd.DataFrame([inputs], columns=features)
-print(inputs,test)
+print(test)
 
 
 def prediction(data, features, target, norm1, norm2):
