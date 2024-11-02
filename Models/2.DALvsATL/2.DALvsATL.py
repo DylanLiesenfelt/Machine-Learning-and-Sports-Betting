@@ -17,7 +17,7 @@ opp_pass_comp_allowed = (195)/opponent_games_played
 opp_yardsAtt_allowed = (opp_pass_yards_allowed/opp_pass_att_allowed)
 opp_passTD_allowed = (13)/opponent_games_played
 
-# QB Average stats this season 
+# QB Average stats this season
 games_played = 7
 
 passing_yards = (1845)/games_played
@@ -38,7 +38,7 @@ test = pd.DataFrame([inputs], columns=features)
 print(test)
 
 
-def prediction(data, features, target, norm1, norm2):
+def prediction(data, features, target):
     df = read_data(data)
 
     X_train, X_test, y_train, y_test = split_data(df[features], df[target])
@@ -50,13 +50,11 @@ def prediction(data, features, target, norm1, norm2):
     final_predict = model.predict(test)
     final_predict = final_predict[0, 0]
     final_predict = float(final_predict)
-    norm_predict = (norm1/norm2) * final_predict # Normalize
 
     # Display results
     print(f'Average Pass Yards This Season: {passing_yards:.2f}')
     print(f'Average Opponent Pass Yards Allowed 2024: {opp_pass_yards_allowed:.2f}')
     print(f'Predicted Pass Yards: {final_predict:.2f}')
-    print(f'Predicted Normalized: {norm_predict:.2f}')
 
 
 # Read data set
@@ -87,4 +85,4 @@ def test_model(model, X_test, y_test):
     print(f'Mean Absolute Error: {mae:.5f}\nMAE%: {maePer:.2f} %\nMean Squared Error: {mse:.5f}\nR2 Score: {r2:.5f}')
 
 # Execute
-prediction(data, features, target, passing_yards, opp_pass_yards_allowed)
+prediction(data, features, target)
