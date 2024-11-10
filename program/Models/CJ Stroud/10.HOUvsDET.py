@@ -7,7 +7,7 @@ import pandas as pd
 # CJ Stroud
 # https://www.pro-football-reference.com/players/S/StroCJ00/gamelog/
 # https://www.pro-football-reference.com/players/S/StroCJ00/gamelog/2024
-QB = inputs.Stats(29.051, (188/8), (269/8), (1942/8), (11/8), (9/8), (16/8))
+QB = inputs.Stats(23.101, (188/8), (269/8), (1942/8), (11/8), (9/8), (16/8))
 
 # DEN Defense: https://www.pro-football-reference.com/teams/den/2024.htm#all_defense
 DEF = inputs.Stats(None, (191/9), (287/9), (1679/9), (11/9), (7/9), (31/9))
@@ -15,6 +15,7 @@ DEF = inputs.Stats(None, (191/9), (287/9), (1679/9), (11/9), (7/9), (31/9))
 path = 'program/Models/CJ Stroud/CJStroud.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
+alpha = 20
 
 # Calc current season last 3 games moving average
 ma3s = []
@@ -40,7 +41,7 @@ target = ['Yds']
 input_stats = [completions, attempts, completionsPercentage, passingTDs, interceptions, passerRating, sacks]
 input_stats = pd.DataFrame([input_stats], columns=features)
 
-prediction = model.run_prediction(data, input_stats, features, target)
+prediction = model.run_prediction(data, input_stats, features, target, alpha)
 
 # Outputs
 print(input_stats)

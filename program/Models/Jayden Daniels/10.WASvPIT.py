@@ -11,9 +11,10 @@ QB = inputs.Stats(23.328, (163/9), (228/9), (1945/9), (9/9), (2/9), (17/9))
 # IND Defense: https://www.pro-football-reference.com/teams/pit/2024.htm
 DEF = inputs.Stats(None, (173/8), (270/8), (1758/8), (8/8), (10/8), (19/8))
 
-path = 'program/Models/Josh Allen/JoshAllen.csv'
+path = 'program/Models/Jayden Daniels/JaydenDaniels.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
+alpha = 1000
 
 # Calc current season last 3 games moving average
 ma3s = []
@@ -39,7 +40,7 @@ target = ['Yds']
 input_stats = [completions, attempts, completionsPercentage, passingTDs, interceptions, passerRating, sacks]
 input_stats = pd.DataFrame([input_stats], columns=features)
 
-prediction = model.run_prediction(data, input_stats, features, target)
+prediction = model.run_prediction(data, input_stats, features, target, alpha)
 
 # Outputs
 print(input_stats)

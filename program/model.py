@@ -10,8 +10,8 @@ def split_data(features, target):
     return X_train, X_test, y_train, y_test
 
 # Train the model
-def make_model(X_train, y_train):
-    model = Lasso(alpha=1)
+def make_model(X_train, y_train, a):
+    model = Lasso(alpha=a)
     model.fit(X_train, y_train)
     return model
 
@@ -19,17 +19,18 @@ def make_model(X_train, y_train):
 def test_model(model, X_test, y_test):
     prediction = model.predict(X_test)
 
+    featsUsed = sum(model.coef_!= 0)
     mae = mean_absolute_error(y_test, prediction)
     maePer = mean_absolute_percentage_error(y_test, prediction) * 100
     mse = mean_squared_error(y_test, prediction)
     r2 = r2_score(y_test, prediction)
-    print(f'Mean Absolute Error: {mae:.5f}\nMAE%: {maePer:.2f} %\nMean Squared Error: {mse:.5f}\nR2 Score: {r2:.5f}')
+    print(f'Features Used: {featsUsed}\nMean Absolute Error: {mae:.5f}\nMAE%: {maePer:.2f} %\nMean Squared Error: {mse:.5f}\nR2 Score: {r2:.5f}')
 
 
-def run_prediction(data, inputs, features, target):
+def run_prediction(data, inputs, features, target, a):
 
     X_train, X_test, y_train, y_test = split_data(data[features], data[target])
-    model = make_model(X_train, y_train)
+    model = make_model(X_train, y_train, a)
     test_model(model, X_test, y_test)
 
     # Convert prediction result to float

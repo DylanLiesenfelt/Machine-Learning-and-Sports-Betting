@@ -15,6 +15,7 @@ DEF = inputs.Stats(None, (199/9), (288/9), (2057/9), (11/9), (5/9), (21/9))
 path = 'program/Models/Aaron Rodgers/ARodgers.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
+alpha = .01
 
 # Calc current season last 3 games moving average
 ma3s = []
@@ -40,7 +41,7 @@ target = ['Yds']
 input_stats = [completions, attempts, completionsPercentage, passingTDs, interceptions, passerRating, sacks]
 input_stats = pd.DataFrame([input_stats], columns=features)
 
-prediction = model.run_prediction(data, input_stats, features, target)
+prediction = model.run_prediction(data, input_stats, features, target, alpha)
 
 # Outputs
 print(input_stats)

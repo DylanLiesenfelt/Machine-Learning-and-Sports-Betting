@@ -15,6 +15,7 @@ DEF = inputs.Stats(None, (204/9), (291/9), (2104/9), (14/9), (6/9), (20/9))
 path = 'program/Models/Josh Allen/JoshAllen.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
+alpha = 0.01
 
 # Calc current season last 3 games moving average
 ma3s = []
@@ -40,7 +41,7 @@ target = ['Yds']
 input_stats = [completions, attempts, completionsPercentage, passingTDs, interceptions, passerRating, sacks]
 input_stats = pd.DataFrame([input_stats], columns=features)
 
-prediction = model.run_prediction(data, input_stats, features, target)
+prediction = model.run_prediction(data, input_stats, features, target, alpha)
 
 # Outputs
 print(input_stats)
