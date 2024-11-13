@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import Lasso
+from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_absolute_error, r2_score, mean_absolute_percentage_error, mean_squared_error
 
 
@@ -10,8 +10,8 @@ def split_data(features, target):
     return X_train, X_test, y_train, y_test
 
 # Train the model
-def make_model(X_train, y_train, a):
-    model = Lasso(alpha=a)
+def make_model(X_train, y_train, a, ratio):
+    model = ElasticNet(alpha=a, l1_ratio=ratio)
     model.fit(X_train, y_train)
     return model
 
@@ -27,10 +27,10 @@ def test_model(model, X_test, y_test):
     print(f'Features Used: {featsUsed}\nMean Absolute Error: {mae:.5f}\nMAE%: {maePer:.2f} %\nMean Squared Error: {mse:.5f}\nR2 Score: {r2:.5f}')
 
 
-def run_prediction(data, inputs, features, target, a):
+def run_prediction(data, inputs, features, target, a, ratio):
 
     X_train, X_test, y_train, y_test = split_data(data[features], data[target])
-    model = make_model(X_train, y_train, a)
+    model = make_model(X_train, y_train, a, ratio)
     test_model(model, X_test, y_test)
 
     # Convert prediction result to float

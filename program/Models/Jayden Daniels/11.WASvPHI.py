@@ -1,21 +1,21 @@
 import sys
-sys.path.append('/home/bub/Desktop/Git Repos/Machine-Learning-and-Sports-Betting/program')
+sys.path.append('../')  # Adjust this path based on where you run the script
 import inputs
-import program.Models.model as model
+import model
 import pandas as pd
 
-# Aaron Rodgers
-# https://www.pro-football-reference.com/players/R/RodgAa00/gamelog/
-# https://www.pro-football-reference.com/players/R/RodgAa00/gamelog/2024/
-QB = inputs.Stats(40.337, (197/9), (316/9), (2107/9), (15/9), (7/9), (20/9))
+# Jayden Daniels, Birthday:
+# https://www.pro-football-reference.com/players/D/DaniJa02/gamelog/2024/
+QB = inputs.Stats(23.331, (180/10), (262/10), (2147/10), (9/10), (2/10), (20/10))
 
-# IND Defense: https://www.pro-football-reference.com/teams/crd/2024.htm#all_defense
-DEF = inputs.Stats(None, (199/9), (288/9), (2057/9), (11/9), (5/9), (21/9))
+# PHI Defense: https://www.pro-football-reference.com/teams/phi/2024.htm
+DEF = inputs.Stats(None, (173/9), (285/9), (1561/9), (8/9), (6/9), (25/9))
 
-path = 'program/Models/Aaron Rodgers/ARodgers.csv'
+path = 'JaydenDaniels.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
-alpha = .01
+alpha = 1000
+ratio = .5
 
 # Calc current season last 3 games moving average
 ma3s = []
@@ -41,7 +41,7 @@ target = ['Yds']
 input_stats = [completions, attempts, completionsPercentage, passingTDs, interceptions, passerRating, sacks]
 input_stats = pd.DataFrame([input_stats], columns=features)
 
-prediction = model.run_prediction(data, input_stats, features, target, alpha)
+prediction = model.run_prediction(data, input_stats, features, target, alpha, ratio)
 
 # Outputs
 print(input_stats)

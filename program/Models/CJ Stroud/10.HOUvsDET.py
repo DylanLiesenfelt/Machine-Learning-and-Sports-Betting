@@ -1,7 +1,7 @@
 import sys
 sys.path.append('/home/bub/Desktop/Git Repos/Machine-Learning-and-Sports-Betting/program')
 import inputs
-import model
+import program.Models.model as model
 import pandas as pd
 
 # CJ Stroud

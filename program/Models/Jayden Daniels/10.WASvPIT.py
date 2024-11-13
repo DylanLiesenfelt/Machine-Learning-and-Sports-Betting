@@ -1,17 +1,17 @@
 import sys
-sys.path.append('/home/bub/Desktop/Git Repos/Machine-Learning-and-Sports-Betting/program')
+sys.path.append('../')  # Adjust this path based on where you run the script
 import inputs
 import model
 import pandas as pd
 
-# Jayden Daniels, Birthday:
+# Jayden Daniels:
 # https://www.pro-football-reference.com/players/D/DaniJa02/gamelog/2024/
 QB = inputs.Stats(23.328, (163/9), (228/9), (1945/9), (9/9), (2/9), (17/9))
 
-# IND Defense: https://www.pro-football-reference.com/teams/pit/2024.htm
+# PIT Defense: https://www.pro-football-reference.com/teams/pit/2024.htm
 DEF = inputs.Stats(None, (173/8), (270/8), (1758/8), (8/8), (10/8), (19/8))
 
-path = 'program/Models/Jayden Daniels/JaydenDaniels.csv'
+path = 'JaydenDaniels.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
 alpha = 1000
