@@ -1,21 +1,21 @@
 import sys
 sys.path.append('/home/bub/Desktop/Git Repos/Machine-Learning-and-Sports-Betting/program')
 import inputs
-import program.Models.model as model
+import models.model as model
 import pandas as pd
 
-# Aaron Rodgers
-# https://www.pro-football-reference.com/players/R/RodgAa00/gamelog/
-# https://www.pro-football-reference.com/players/R/RodgAa00/gamelog/2024/
-QB = inputs.Stats(40.337, (197/9), (316/9), (2107/9), (15/9), (7/9), (20/9))
+# CJ Stroud
+# https://www.pro-football-reference.com/players/S/StroCJ00/gamelog/
+# https://www.pro-football-reference.com/players/S/StroCJ00/gamelog/2024
+QB = inputs.Stats(23.101, (188/8), (269/8), (1942/8), (11/8), (9/8), (16/8))
 
-# IND Defense: https://www.pro-football-reference.com/teams/crd/2024.htm#all_defense
-DEF = inputs.Stats(None, (199/9), (288/9), (2057/9), (11/9), (5/9), (21/9))
+# DEN Defense: https://www.pro-football-reference.com/teams/den/2024.htm#all_defense
+DEF = inputs.Stats(None, (191/9), (287/9), (1679/9), (11/9), (7/9), (31/9))
 
-path = 'program/Models/Aaron Rodgers/ARodgers.csv'
+path = 'program/Models/CJ Stroud/CJStroud.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
-alpha = .01
+alpha = 20
 
 # Calc current season last 3 games moving average
 ma3s = []

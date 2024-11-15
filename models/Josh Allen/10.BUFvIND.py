@@ -1,21 +1,21 @@
 import sys
 sys.path.append('/home/bub/Desktop/Git Repos/Machine-Learning-and-Sports-Betting/program')
 import inputs
-import program.Models.model as model
+import models.model as model
 import pandas as pd
 
-# Patrick Mahomes
-# https://www.pro-football-reference.com/players/M/MahoPa00/gamelog/
-# https://www.pro-football-reference.com/players/M/MahoPa00/gamelog/2024/
-QB = inputs.Stats(29.051, (188/8), (269/8), (1942/8), (11/8), (9/8), (16/8))
+# Josh Allen, Birthday:
+# https://www.pro-football-reference.com/players/A/AlleJo02/gamelog/
+# https://www.pro-football-reference.com/players/A/AlleJo02/gamelog/2024/
+QB = inputs.Stats(28.4715, (168/9), (262/9), (2001/9), (17/9), (2/9), (11/9))
 
-# DEN Defense: https://www.pro-football-reference.com/teams/den/2024.htm#all_defense
-DEF = inputs.Stats(None, (191/9), (287/9), (1679/9), (11/9), (7/9), (31/9))
+# IND Defense: https://www.pro-football-reference.com/teams//2024.htm#all_defense
+DEF = inputs.Stats(None, (204/9), (291/9), (2104/9), (14/9), (6/9), (20/9))
 
-path = 'program/Models/Patrick Mahomes/PMahomes.csv'
+path = 'program/Models/Josh Allen/JoshAllen.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
-alpha = 0.1
+alpha = 0.01
 
 # Calc current season last 3 games moving average
 ma3s = []
