@@ -4,18 +4,20 @@ import inputs
 import model
 import pandas as pd
 
-# Jayden Daniels
-# https://www.pro-football-reference.com/players/D/DaniJa02/gamelog/2024/
-QB = inputs.Stats(23.331, (180/10), (262/10), (2147/10), (9/10), (2/10), (20/10))
+# Josh Allen:
+# https://www.pro-football-reference.com/players/A/AlleJo02/gamelog/
+# https://www.pro-football-reference.com/players/A/AlleJo02/gamelog/2024/
+QB = inputs.Stats(29.192, (190/10), (299/10), (2281/10), (17/10), (4/10), (13/10))
 
-# PHI Defense: https://www.pro-football-reference.com/teams/phi/2024.htm
-DEF = inputs.Stats(None, (173/9), (285/9), (1561/9), (8/9), (6/9), (25/9))
+# KC Defense: https://www.pro-football-reference.com/teams/kan/2024.htm#all_defense
+DEF = inputs.Stats(None, (191/9), (290/9), (1860/9), (13/9), (5/9), (19/9))
 
-path = 'JaydenDaniels.csv'
+path = 'JoshAllen.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
-alpha = 1000
-ratio = .5
+
+alpha = 0.01
+ratio = 0.5
 
 # Calc current season last 3 games moving average
 ma3s = []
