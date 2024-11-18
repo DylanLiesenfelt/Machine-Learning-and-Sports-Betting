@@ -7,7 +7,7 @@ import pandas as pd
 # CJ Stroud
 # https://www.pro-football-reference.com/players/S/StroCJ00/gamelog/
 # https://www.pro-football-reference.com/players/S/StroCJ00/gamelog/2024
-QB = inputs.Stats(23.101, (188/8), (269/8), (1942/8), (11/8), (9/8), (16/8))
+QB = inputs.Stats(23.031, (188/8), (269/8), (1942/8), (11/8), (9/8), (16/8))
 
 # DEN Defense: https://www.pro-football-reference.com/teams/den/2024.htm#all_defense
 DEF = inputs.Stats(None, (191/9), (287/9), (1679/9), (11/9), (7/9), (31/9))
