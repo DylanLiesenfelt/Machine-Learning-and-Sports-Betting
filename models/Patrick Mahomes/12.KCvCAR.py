@@ -4,18 +4,17 @@ import inputs
 import model
 import pandas as pd
 
-# Jared Goff:
-# https://www.pro-football-reference.com/players/G/GoffJa00/gamelog/
-# https://www.pro-football-reference.com/players/G/GoffJa00/gamelog/2024/
-QB = inputs.Stats(30.041, (197/10), (270/10), (2492/10), (20/10), (9/10), (18/10))
+# Patrick Mahomes
+# https://www.pro-football-reference.com/players/M/MahoPa00/gamelog/
+# https://www.pro-football-reference.com/players/M/MahoPa00/gamelog/2024/
+QB = inputs.Stats(29.071, (239/10), (344/10), (2404/10), (15/10), (11/10), (22/10))
 
-# CHI Defense: https://www.pro-football-reference.com/teams/chi/2024.htm#all_defense
-DEF = inputs.Stats(None, (180/10), (288/10), (1974/10), (7/10), (9/10), (25/10))
+# CAR Defense: https://www.pro-football-reference.com/teams/car/2024.htm#all_defense
+DEF = inputs.Stats(None, (211/10), (307/10), (2268/10), (18/10), (5/10), (12/10))
 
-path = 'JaredGoff.csv'
+path = 'PMahomes.csv'
 data = pd.read_csv(path).dropna()
 features = ['Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'Int', 'Rate', 'Sk']
-
 alpha = 0.1
 ratio = 0.5
 
